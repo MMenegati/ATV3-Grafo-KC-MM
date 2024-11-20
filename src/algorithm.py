@@ -22,11 +22,18 @@ def calcular_propriedades(G):
     """
     num_vertices = G.number_of_nodes()
     num_arestas = G.number_of_edges()
-    graus = [d for _, d in G.degree()]
+    graus = obter_graus(G)
 
-    grau_min = min(graus) if graus else 0
-    grau_max = max(graus) if graus else 0
-    grau_medio = np.mean(graus) if graus else 0
+    # Verifica se a lista de graus não está vazia
+    if graus:
+        grau_min = min(graus)
+        grau_max = max(graus)
+        grau_medio = np.mean(graus)
+    else:
+        # Se a lista de graus estiver vazia, define os valores como 0
+        grau_min = 0
+        grau_max = 0
+        grau_medio = 0
 
     # Calcula o diâmetro apenas se o grafo for conectado
     if nx.is_connected(G) and num_vertices > 1:
@@ -35,3 +42,11 @@ def calcular_propriedades(G):
         diametro = 'N/A'  # Representa que o diâmetro não pode ser calculado
     
     return num_vertices, num_arestas, grau_min, grau_max, grau_medio, diametro
+
+def obter_graus(G):
+    graus = []
+    
+    for vertice, grau in G.degree():
+        graus.append(grau)
+    
+    return graus
