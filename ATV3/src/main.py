@@ -1,3 +1,10 @@
+# Comando para executar: 
+# python src/main.py inc fim stp p
+
+
+# Exemplo:
+# python src/main.py 10 200 10 0.5
+
 import argparse
 from algorithm import gerar_grafo, calcular_propriedades
 
